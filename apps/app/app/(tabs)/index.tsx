@@ -1,18 +1,5 @@
-import { Link } from "expo-router";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaWebView } from "@/components/SafeAreaWebView";
 
 export default function HomeScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Link href="/notifications">알림 목록</Link>
-    </SafeAreaView>
-  );
+  return <SafeAreaWebView uri="/" />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

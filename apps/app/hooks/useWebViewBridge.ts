@@ -16,6 +16,9 @@ export const useWebViewBridge = () => {
         case "router.push":
           router.push(bridgeMessage.payload.href as Href);
           break;
+        case "router.navigate":
+          router.navigate(bridgeMessage.payload.href as Href);
+          break;
         default:
           bridgeMessage satisfies never;
       }

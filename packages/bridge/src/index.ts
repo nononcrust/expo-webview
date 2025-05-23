@@ -18,8 +18,15 @@ const RouterPushMessage = z.object({
   }),
 });
 
+const RouterNavigateMessage = z.object({
+  type: z.literal("router.navigate"),
+  payload: z.object({
+    href: z.string(),
+  }),
+});
+
 export type BridgeMessage = z.infer<typeof BridgeMessage>;
-export const BridgeMessage = z.union([RouterBackMessage, RouterPushMessage]);
+export const BridgeMessage = z.union([RouterBackMessage, RouterPushMessage, RouterNavigateMessage]);
 
 const postMessage = (message: BridgeMessage) => {
   window.ReactNativeWebView.postMessage(JSON.stringify(message));
@@ -29,6 +36,12 @@ export const bridge = {
   router: {
     back: () => {
       postMessage({ type: "router.back" });
+    },
+    push: (href: string) => {
+      postMessage({ type: "router.push", payload: { href } });
+    },
+    navigate: (href: string) => {
+      postMessage({ type: "router.navigate", payload: { href } });
     },
   },
 };
